@@ -73,14 +73,25 @@ function load_parameters(){
         this.object.randomMove       = 1.9;
       } else if(preset=='Weird'){
         this.object.deadZone         = 441.1510070926051
-        this.object.easing           = 0.97
+        this.object.easing           = 0.20;
         this.object.lineWidth        = 25;
         this.object.lowQuality       = true;
         this.object.maxEntity        = 80;
         this.object.minDistance      = 25
         this.object.showCircles      = false;
-        this.object.generationTime   = 70   ;
-        this.object.randomMove       = 0.9;
+        this.object.generationTime   = 70 ;
+        //this.object.lifetime         = 8 ;
+
+        this.object.randomMove       = 10;
+        this.object.activateSpawning=true;
+        setTimeout(function(iths)
+          {
+            return function(){
+              iths.activateSpawning=false;
+            }
+          }(this.object),
+          3000
+        )
       }
     });
   gui.add(guiui, 'fullscreen');
