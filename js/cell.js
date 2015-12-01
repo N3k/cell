@@ -23,14 +23,17 @@ Cell.prototype = {
 
   render : function() {
     var ctx = this.world.ctx;
+    var size = param.minDistance/2*((param.generationTime*2)-this.canGenerate)/param.generationTime/2;
+
     ctx.globalAlpha=0.9;
     ctx.fillStyle = "hsl(" + this.hue + ", 90%, 50% )";
   	if(this.target!=this && !this.target.dead ){
+        var targetSize = param.minDistance/2*((param.generationTime*2)-this.target.canGenerate)/param.generationTime/2;
       	ctx.beginPath();
   	    ctx.moveTo(this.x + this.world.centerX, this.y + this.world.centerY);
   	    ctx.lineTo(this.target.x + this.world.centerX, this.target.y + this.world.centerY);
   		ctx.strokeStyle="hsla(" + this.hue + ", 90%, 50%, 0.2 )";
-  	    ctx.lineWidth = param.lineWidth+0.01;
+  	    ctx.lineWidth = Math.min(param.lineWidth+0.01, Math.min(targetSize,size)) ;
   		ctx.stroke();
   	}
 
@@ -50,8 +53,7 @@ Cell.prototype = {
         ctx.fill();
       }
       // Dessin de la cellule
-      var size = param.minDistance/2*((param.generationTime*2)-this.canGenerate)/param.generationTime/2,
-      light = (100-((this.life/(param.lifetime*param.generationTime*(1.5))*50)|0));
+      var light = (100-((this.life/(param.lifetime*param.generationTime*(1.5))*50)|0));
       ctx.globalAlpha=0.7;
       if(size<=0) size=0.1;
       var grd = ctx.createRadialGradient(this.x + this.world.centerX, this.y + this.world.centerY, 0, this.x + this.world.centerX, this.y + this.world.centerY, size);

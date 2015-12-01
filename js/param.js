@@ -24,7 +24,8 @@ function load_parameters(){
   		'Default',
   		'Network',
   		'Neural',
-      'Entropy'
+      'Entropy',
+      'Weird'
   	]).onChange(function  ( preset ) { console.log (this);
     this.object.activateSpawning = false ;
     this.object.deadZone         = 10    ;
@@ -58,7 +59,7 @@ function load_parameters(){
         this.object.showCircles=false;
         //this.object.sound=false;
       }else if(preset=='Neural'){
-		this.object.deadZone= 204.03239703601585
+		    this.object.deadZone= 204.03239703601585
         this.object.easing= 0.96
         this.object.lineWidth= 10
         this.object.minDistance= 165.4316732724453
@@ -70,6 +71,16 @@ function load_parameters(){
         this.object.lineWidth        = 0.001;
         this.object.minDistance      = 66.17266930897812;
         this.object.randomMove       = 1.9;
+      } else if(preset='Weird'){
+        this.object.deadZone         = 441.1510070926051
+        this.object.easing           = 0.97
+        this.object.lineWidth        = 25;
+        this.object.lowQuality       = true;
+        this.object.maxEntity        = 80;
+        this.object.minDistance      = 25
+        this.object.showCircles      = false;
+        this.object.generationTime   = 70   ;
+        this.object.randomMove       = 0.9;
       }
     });
   gui.add(guiui, 'fullscreen');
@@ -77,7 +88,7 @@ function load_parameters(){
   var Growth = gui.addFolder('Growth');
   Growth.add(guiui, 'activateSpawning' )                     .listen();
   Growth.add(guiui, 'spawningGap'   , 0, 2048 )              .listen();
-  Growth.add(guiui, 'generationTime', 1, 5000 )              .listen();
+  Growth.add(guiui, 'generationTime', 1, 5000 ).step(10)     .listen();
   Growth.add(guiui, 'lifetime'      , 1, 15 )                .listen();
   Growth.add(guiui, 'maxEntity'     , 1, 500 )               .listen();
 
@@ -89,7 +100,7 @@ function load_parameters(){
   Behavior.add(guiui, 'randomMove'    , 0, 10).step(0.1)      .listen();
 
   var Display = gui.addFolder('Display');
-  Display.add(guiui, 'lineWidth'     , 0, 10).step(1)        .listen();
+  Display.add(guiui, 'lineWidth'     , 0, 100).step(1)        .listen();
   Display.add(guiui, 'showCircles' )                         .listen();
   Display.add(guiui, 'lowQuality')                           .listen();
   Display.add(guiui, 'showText')                             .listen();
