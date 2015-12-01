@@ -71,7 +71,7 @@ function load_parameters(){
         this.object.lineWidth        = 0.001;
         this.object.minDistance      = 66.17266930897812;
         this.object.randomMove       = 1.9;
-      } else if(preset='Weird'){
+      } else if(preset=='Weird'){
         this.object.deadZone         = 441.1510070926051
         this.object.easing           = 0.97
         this.object.lineWidth        = 25;
